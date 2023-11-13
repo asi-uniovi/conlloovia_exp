@@ -42,6 +42,7 @@ from conlloovia import (
     ConllooviaAllocator,
     Status,
     Solution,
+    LimitsAdapter,
 )
 from conlloovia.first_fit import FirstFitAllocator, FirstFitIcOrdering
 
@@ -88,6 +89,7 @@ def solve_conlloovia(
     problem = Problem(
         system=system, workloads=workloads, sched_time_size=sched_time_size
     )
+    problem = LimitsAdapter(problem).compute_adapted_problem()
     alloc = ConllooviaAllocator(problem)
 
     solver = PULP_CBC_CMD(gapRel=frac_gap, threads=7, timeLimit=max_seconds, msg=False)
@@ -111,6 +113,7 @@ def solve_first_fit(
     problem = Problem(
         system=system, workloads=workloads, sched_time_size=sched_time_size
     )
+    problem = LimitsAdapter(problem).compute_adapted_problem()
     alloc = FirstFitAllocator(problem, ordering=ordering)
 
     sol = alloc.solve()
@@ -134,7 +137,7 @@ def get_formatted_status(stats: SummaryStats):
 
 
 def print_sol(
-    sol: Solution, perfs, window_size, allocator_name: str, verbose: bool = True
+    sol: Solution, window_size, allocator_name: str, verbose: bool = True
 ) -> Tuple[int, int]:
     """Prints the solution and returns the number of VMs and containers."""
     num_vms = 0
@@ -164,6 +167,7 @@ def print_sol(
         num_cores_vms += vm.ic.cores
         mem_vms += vm.ic.mem
 
+        perfs = sol.problem.system.perfs
         for cc, num_replicas in sol.alloc.containers.items():
             if num_replicas > 0 and cc.vm == vm:
                 perf = perfs[(vm.ic, cc.cc)]
@@ -449,7 +453,7 @@ def main() -> None:
                     ]:
                         # print(yaml.dump(sol))
                         num_vms, num_containers = print_sol(
-                            sol, perfs, window_size, allocator_name, verbose=False
+                            sol, window_size, allocator_name, verbose=False
                         )
                         stats = SummaryStats(
                             (
