@@ -38,6 +38,7 @@ from conlloovia import (
     ConllooviaAllocator,
     Solution,
     Status,
+    LimitsAdapter,
 )
 from conlloovia.visualization import SolutionPrettyPrinter, ProblemPrettyPrinter
 from conlloovia.first_fit import FirstFitAllocator, FirstFitIcOrdering
@@ -339,6 +340,7 @@ def run_time_slot_conlloovia(
     workloads = compose_workloads(system, window_size, reqs)
 
     problem = Problem(system=system, workloads=workloads, sched_time_size=window_size)
+    problem = LimitsAdapter(problem).compute_adapted_problem()
 
     if time_slot == 0:
         ProblemPrettyPrinter(problem).print()
@@ -400,6 +402,7 @@ def run_time_slot_ffc(
     # Create the workload for each app
     workloads = compose_workloads(system, window_size, reqs)
     problem = Problem(system=system, workloads=workloads, sched_time_size=window_size)
+    problem = LimitsAdapter(problem).compute_adapted_problem()
     alloc_ffc = FirstFitAllocator(problem, ordering=FirstFitIcOrdering.CORE_DESCENDING)
     sol_ffc = alloc_ffc.solve()
 
@@ -446,6 +449,7 @@ def run_time_slot_ffp(
     # Create the workload for each app
     workloads = compose_workloads(system, window_size, reqs)
     problem = Problem(system=system, workloads=workloads, sched_time_size=window_size)
+    problem = LimitsAdapter(problem).compute_adapted_problem()
     alloc_ffp = FirstFitAllocator(problem, ordering=FirstFitIcOrdering.PRICE_ASCENDING)
     sol_ffp = alloc_ffp.solve()
 
