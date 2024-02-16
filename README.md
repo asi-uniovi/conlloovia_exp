@@ -1,6 +1,14 @@
 # conlloovia_exp
 Experiments for the paper presenting
-[Conlloovia](https://github.com/asi-uniovi/conlloovia). All the result files from the
+[Conlloovia](https://github.com/asi-uniovi/conlloovia): "[Joint Autoscaling of
+Containers and Virtual Machines for Cost Optimization in Container
+Clusters](https://link.springer.com/article/10.1007/s10723-023-09732-4)".
+Citation:
+
+    Entrialgo, J., García, M., García, J., López, J.M. and Díaz, J.L., 2024. Joint Autoscaling of Containers and Virtual Machines for Cost Optimization in Container Clusters. Journal of Grid Computing, 22(1), pp.1-24. https://doi.org/10.1007/s10723-023-09732-4
+
+
+All the result files from the
 experiments to generate the figures and the figures themselves are stored here. In
 addition, the code to regenerate the results and the figures is also included.
 
