@@ -8,12 +8,30 @@ Citation:
     Entrialgo, J., García, M., García, J., López, J.M. and Díaz, J.L., 2024. Joint Autoscaling of Containers and Virtual Machines for Cost Optimization in Container Clusters. Journal of Grid Computing, 22(1), pp.1-24. https://doi.org/10.1007/s10723-023-09732-4
 
 
-All the result files from the
-experiments to generate the figures and the figures themselves are stored here. In
-addition, the code to regenerate the results and the figures is also included.
+All the result files from the experiments to generate the figures and the
+figures themselves are stored here. In addition, the code to regenerate the
+results and the figures is also included.
 
-Install the conlloovia package following the instructions in [its
-repository](https://github.com/asi-uniovi/conlloovia).
+In order to reproduce the experiments, you need a machine with at least 16 GB of
+memory. Clone the repository:
+
+```bash
+git clone https://github.com/asi-uniovi/conlloovia_exp
+```
+
+It is recommended to create a virtual environment and activate it:
+
+```bash
+cd conlloovia_exp
+python3 -m venv .venv  # Make sure you are using Python 3.10 or later
+source .venv/bin/activate  # In Windows, use .venv\Scripts\activate
+```
+
+Then, install the required packages:
+
+```bash
+pip install -r requirements.txt
+```
 
 There are three sets of experiments: about problem **sizes**, about the influence of the
 window size with **synthetic** traces and about the influence of the window size with
@@ -61,4 +79,3 @@ Additionally, the process to generate the traces for two applications from the o
 Alibaba traces can be found in the notebook
 [`AlibabaTraceProcessing.ipynb`](traces/alibaba/AlibabaTraceProcessing.ipynb) inside the
 [`traces/alibaba`](traces/alibaba) directory.
-
