@@ -12,7 +12,7 @@ certifi==2024.2.2
 cffi==1.16.0
 charset-normalizer==3.3.2
 click==8.1.7
-cloudmodel @ git+https://github.com/jldiaz-uniovi/cloudmodel.git
+cloudmodel @ git+https://github.com/asi-uniovi/cloudmodel.git@d987309f2a8be2d8af028fe132a5b0ff65fa801b
 comm==0.2.1
 conlloovia @ git+https://github.com/asi-uniovi/conlloovia.git@d22e831ab8f8246ffd02f208296a21eed6c41ec1
 contourpy==1.2.0
